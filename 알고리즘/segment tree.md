@@ -1,36 +1,35 @@
 # Segment Tree
 
 배열의 특정구간의 합(예 : sum(A[N:M]))을 구할 때 쓰입니다. 배열의 변경이 많이 일어날 때 유용합니다.
-
+  
 ### 시간복잡도
 구간의 합 : O(logN)
 수정 : O(logN)
-
-
+</br>
 예시)
 A = [1,9,6,3,5,7,3]
-![기본트리](https://user-images.githubusercontent.com/68533862/114152032-ba7f2a80-9958-11eb-8ea7-34d51b21906b.jpg)
+![기본트리](https://user-images.githubusercontent.com/68533862/114152032-ba7f2a80-9958-11eb-8ea7-34d51b21906b.jpg)  
+</br>
 
-### 규칙
+## 규칙
 1. leaf Node 는 배열(A)의 원소입니다.
 2. 트리의 각 노드는 자식 노드의 합입니다.
 3. Full Binary Tree 입니다.(각 노드의 자식의 수는 0또는 2입니다)
+</br>
 
-### 구현
+## 구현
 1. Tree는 배열로 구현합니다.
 2. root node 는 Tree[1] 입니다 (Tree[0]을 root node로 하면 3번에서 자식노드가 Tree[0], Tree[1]이 되기 때문에 노드가 겹칩니다)
 3. Tree[N]의 자식 노드는 각각 Tree[2N], Tree[2N+1] 입니다.
-
-
-
+</br>
 
 ### 총 노드의 수
 1. N=1 일때 1개
 2. N이 1 커질때 추가적으로 필요한 노드의 수는 2개씩 늘어남
 3. 따라서 총 노드의 수는 2*N-1
 4. 하지만 Tree를 배열로 만들었을 때 비어있는 인덱스가 존재하기 때문에 Perfect Binary Tree가 아닐때는 공간을 더 할당해야 한다.
-5. Perfect Binary Tree : Full Binary Tree에서 각 루트에서 리프까지 높이가 같은 노드, Segment Tree 가 Perfect Binary Tree가 될 조건은 N = 2<sup>H</sup>
-
+5. Perfect Binary Tree : Full Binary Tree에서 각 리프에서 높이까지 depth가 모두 같은 노드, Segment Tree 가 Perfect Binary Tree가 될 조건은 N = 2<sup>H</sup>
+</br>
 
 ```python
 import math
@@ -59,8 +58,9 @@ Tree[root] = makeTree(0, len(A)-1, 1)  # maketree(A배열의 시작 인덱스, A
 print(Tree)
 
 ```
+</br>
 
-### 구간합 구하기
+## 구간합 구하기
 
 전체 트리를 순환하며 합을 찾습니다
 예제 : sum(A[0:4])
@@ -84,8 +84,9 @@ def find(start, end, left, right, node):
 # sum(A[0:4]) 구하기
 print(find(0, len(A)-1, 0, 4, 1))
 ```
+</br>
 
-### 수정
+## 수정
 트리를 순환하며 수정될 원소를 자손으로 가지고 있는 노드를 모두 변경해줍니다
 
 ![트리수정](https://user-images.githubusercontent.com/68533862/114152169-ea2e3280-9958-11eb-995f-932905927ce2.jpg)
@@ -112,15 +113,16 @@ update(0, len(A)-1, 5, -2, 1)
 print(Tree)
 
 ```
-
+</br>
+</br>
 
 # 추가자료
 ### prefix sum
 배열의 값이 수정되지 않는다면 Prefix Sum 으로 구간합을 구하는 것이 더 좋은 방법입니다.
 
-구간합 : O(1)
-삽입 : O(1)
-수정 : O(N)
+구간합 : O(1)  
+삽입 : O(1)  
+수정 : O(N)  
 
 예시)
 A = [1,9,6,3,5,7,3]
